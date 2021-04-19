@@ -1,16 +1,13 @@
 from __future__ import annotations
 
 import random
-from typing import Iterator, List, Tuple, TYPE_CHECKING
+from typing import Iterator, List, Tuple
 
 import tcod
 
 from .GameMap import GameMap
 from .tiles import floor
-
-
-if TYPE_CHECKING:
-    from src.server.game.Entity import Entity
+from src.server.game.Entity import Entity
 
 
 class RectangularRoom:

@@ -46,14 +46,6 @@ class Server:
                     print(f"Got action {action}")
                     game.handle_action(action)
                     self.send(conn, game)
-                    # msg_length = conn.recv(self.HEADER).decode(self.FORMAT)
-                    # msg_length = int(msg_length)
-                    # data = conn.recv(msg_length).decode(self.FORMAT)
-                    # print(data)
-                    # if not data:
-                    #     break
-                    # conn.send(f"Got Message {data}".encode(self.FORMAT))
-
 
 if __name__ == "__main__":
     server = Server()
