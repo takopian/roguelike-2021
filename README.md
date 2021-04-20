@@ -2,6 +2,12 @@
 
 ## Deployment:
 
+#### Windows:
+```console
+pip install tcod
+pip install numpy
+pip install pickle
+
 #### Linux:
 ```console
 sudo apt-get install libsdl2-2.0
