@@ -1,6 +1,7 @@
 import numpy as np
 from tcod.console import Console
-from .tiles import wall
+
+from src.server.game.map.tiles import wall
 
 
 class GameMap:

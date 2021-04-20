@@ -1,11 +1,14 @@
-import socket
 import pickle
+import socket
+
 import tcod
-from InputHandler import InputHandler
+
+from src.client.InputHandler import InputHandler
 
 
 class Client:
     def __init__(self, server=None, port=None):
+        self.screen_size = (70, 70)
         self.SERVER = server or "127.0.0.1"
         self.PORT = port or 5050
         self.FORMAT = 'utf-8'
@@ -33,9 +36,13 @@ class Client:
             self.send(event.name)
 
     def start(self):
+        screen_width = self.screen_size[0]
+        screen_height = self.screen_size[1]
+
         engine = self.receive()
         with tcod.context.new_terminal(
-                70, 70
+                screen_width,
+                screen_height
         ) as context:
             input_handler = InputHandler()
             root_console = tcod.Console(engine.game_map.width, engine.game_map.height, order="F")

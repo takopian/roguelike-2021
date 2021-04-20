@@ -1,26 +1,23 @@
-from __future__ import annotations
-from .Engine import Engine
-from .Entity import Entity, MovableEntity
+from src.server.game.Engine import Engine
+from src.server.game.Entity import MovableEntity, Entity
 
 
-class Action:
-    def perform(self, engine: Engine, entity: Entity) -> None:
+class Command:
+    def invoke(self, engine: Engine, entity: Entity) -> None:
         raise NotImplementedError()
 
 
-class EscapeAction(Action):
-    def perform(self, engine: Engine, entity: Entity) -> None:
+class EscapeCommand(Command):
+    def invoke(self, engine: Engine, entity: Entity) -> None:
         raise SystemExit()
 
 
-class MovementAction(Action):
+class MovementCommand(Command):
     def __init__(self, dx: int, dy: int):
-        super().__init__()
-
         self.dx = dx
         self.dy = dy
 
-    def perform(self, engine: Engine, entity: MovableEntity) -> None:
+    def invoke(self, engine: Engine, entity: MovableEntity) -> None:
         new_x = entity.x + self.dx
         new_y = entity.y + self.dy
         if not engine.game_map.in_bounds(new_x, new_y):

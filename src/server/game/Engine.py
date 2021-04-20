@@ -1,8 +1,10 @@
-from .Entity import Entity, MovableEntity
-from .map.GameMap import GameMap
 from typing import Set
-from tcod.context import Context
+
 from tcod.console import Console
+from tcod.context import Context
+
+from src.server.game.Entity import Entity, MovableEntity
+from src.server.game.map.GameMap import GameMap
 
 
 class Engine:
@@ -14,14 +16,14 @@ class Engine:
     def handle_action(self, action) -> None:
         if action is not None:
             print(f"Performing {action}")
-            action.perform(self, self.player)
+            action.invoke(self, self.player)
 
     def render(self, console: Console, context: Context) -> None:
         self.game_map.render(console)
 
         for entity in self.entities:
-            console.print(entity.x, entity.y, entity.char)
-        console.print(self.player.x, self.player.y, self.player.char)
+            console.print(entity.x, entity.y, str(entity))
+        console.print(self.player.x, self.player.y, str(self.player))
         context.present(console)
 
         console.clear()

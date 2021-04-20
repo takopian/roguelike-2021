@@ -1,13 +1,11 @@
-from __future__ import annotations
-
 import random
 from typing import Iterator, List, Tuple
 
 import tcod
 
-from .GameMap import GameMap
-from .tiles import floor
 from src.server.game.Entity import Entity
+from src.server.game.map.GameMap import GameMap
+from src.server.game.map.tiles import floor
 
 
 class RectangularRoom:
@@ -28,7 +26,7 @@ class RectangularRoom:
     def inner(self) -> Tuple[slice, slice]:
         return slice(self.x1 + 1, self.x2), slice(self.y1 + 1, self.y2)
 
-    def intersects(self, other: RectangularRoom) -> bool:
+    def intersects(self, other) -> bool:
         return (
             self.x1 <= other.x2
             and self.x2 >= other.x1

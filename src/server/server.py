@@ -1,8 +1,9 @@
-import socket
 import pickle
-from src.server.game.map.DungeonGenerator import generate_dungeon
+import socket
+
 from src.server.game.Engine import Engine
-from src.server.game.Character import Character
+from src.server.game.Entity import Player, Enemy
+from src.server.game.map.DungeonGenerator import generate_dungeon
 
 
 class Server:
@@ -30,20 +31,21 @@ class Server:
         return data
 
     def start(self):
-        print(f"Server started on port: {self.PORT}")
+        print("Server started on port: {}".format(self.PORT))
         with self.socket as s:
             s.listen()
             conn, addr = s.accept()
             with conn:
                 print('Connected by', addr)
-                player = Character(35, 35, "@")
-                npc = Character(25, 15, "@")
+                player = Player(35, 35)
+                enemy = Enemy(25, 15)
                 map = generate_dungeon(20, 15, 20, 70, 70, player)
-                game = Engine({npc}, map, player)
+
+                game = Engine({enemy}, map, player)
                 self.send(conn, game)
                 while True:
                     action = self.receive(conn)
-                    print(f"Got action {action}")
+                    print("Got action {}".format(action))
                     game.handle_action(action)
                     self.send(conn, game)
 
