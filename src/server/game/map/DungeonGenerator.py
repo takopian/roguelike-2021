@@ -8,7 +8,7 @@ from src.server.game.map.GameMap import GameMap
 from src.server.game.map.tiles import floor
 
 
-class RectangularRoom:
+class Room:
     def __init__(self, x: int, y: int, width: int, height: int):
         self.x1 = x
         self.y1 = y
@@ -66,7 +66,7 @@ def generate_dungeon(
     """Generate a new dungeon map."""
     dungeon = GameMap(map_width, map_height)
 
-    rooms: List[RectangularRoom] = []
+    rooms: List[Room] = []
 
     for r in range(max_rooms):
         room_width = random.randint(room_min_size, room_max_size)
@@ -76,7 +76,7 @@ def generate_dungeon(
         y = random.randint(0, dungeon.height - room_height - 1)
 
         # "RectangularRoom" class makes rectangles easier to work with
-        new_room = RectangularRoom(x, y, room_width, room_height)
+        new_room = Room(x, y, room_width, room_height)
 
         # Run through the other rooms and see if they intersect with this one.
         if any(new_room.intersects(other_room) for other_room in rooms):

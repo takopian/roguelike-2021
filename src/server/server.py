@@ -1,8 +1,9 @@
 import pickle
 import socket
 
+from src.server.game.Enemy import Enemy
 from src.server.game.Engine import Engine
-from src.server.game.Entity import Player, Enemy
+from src.server.game.Player import Player
 from src.server.game.map.DungeonGenerator import generate_dungeon
 
 
@@ -48,6 +49,7 @@ class Server:
                     print("Got action {}".format(action))
                     game.handle_action(action)
                     self.send(conn, game)
+
 
 if __name__ == "__main__":
     server = Server()

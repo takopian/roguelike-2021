@@ -7,12 +7,12 @@ class Command:
         raise NotImplementedError()
 
 
-class EscapeCommand(Command):
+class Escape(Command):
     def invoke(self, engine: Engine, entity: Entity) -> None:
         raise SystemExit()
 
 
-class MovementCommand(Command):
+class Movement(Command):
     def __init__(self, dx: int, dy: int):
         self.dx = dx
         self.dy = dy

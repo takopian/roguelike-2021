@@ -2,7 +2,7 @@ from typing import Optional
 
 import tcod.event
 
-from src.server.game.Commands import Command, EscapeCommand, MovementCommand
+from src.server.game.Commands import Command, Escape, Movement
 
 
 class InputHandler(tcod.event.EventDispatch[Command]):
@@ -15,15 +15,15 @@ class InputHandler(tcod.event.EventDispatch[Command]):
         key = event.sym
 
         if key == tcod.event.K_UP:
-            action = MovementCommand(dx=0, dy=-1)
+            action = Movement(dx=0, dy=-1)
         elif key == tcod.event.K_DOWN:
-            action = MovementCommand(dx=0, dy=1)
+            action = Movement(dx=0, dy=1)
         elif key == tcod.event.K_LEFT:
-            action = MovementCommand(dx=-1, dy=0)
+            action = Movement(dx=-1, dy=0)
         elif key == tcod.event.K_RIGHT:
-            action = MovementCommand(dx=1, dy=0)
+            action = Movement(dx=1, dy=0)
 
         elif key == tcod.event.K_ESCAPE:
-            action = EscapeCommand()
+            action = Escape()
 
         return action
