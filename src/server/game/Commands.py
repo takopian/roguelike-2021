@@ -13,9 +13,10 @@ class Escape(Command):
 
 
 class Movement(Command):
-    def __init__(self, dx: int, dy: int):
+    def __init__(self, dx: int, dy: int, entity_id: str):
         self.dx = dx
         self.dy = dy
+        self.entity_id = entity_id
 
     def invoke(self, engine: Engine, entity: MovableEntity) -> None:
         new_x = entity.x + self.dx
