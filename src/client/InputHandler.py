@@ -28,6 +28,6 @@ class InputHandler(tcod.event.EventDispatch[Command]):
             action = Movement(dx=1, dy=0, entity_id=self.entity_id)
 
         elif key == tcod.event.K_ESCAPE:
-            action = Escape()
+            action = Escape(self.entity_id)
 
         return action
